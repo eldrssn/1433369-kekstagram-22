@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Максим Калимуллин](https://up.htmlacademy.ru/javascript/22/user/1433369).
-* Наставник: `Неизвестно`.
+- Студент: [Максим Калимуллин](https://up.htmlacademy.ru/javascript/22/user/1433369).
+- Наставник: [Дмитрий Быков](https://htmlacademy.ru/profile/id618225).
 
 ---
 
