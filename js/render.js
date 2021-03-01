@@ -16,7 +16,7 @@ postsFeed.forEach(({ url, likes, comments }) => {
   const pictureMiniature = pictureTemplate.cloneNode(true);
   pictureMiniature.querySelector('.picture__img').src = url;
   pictureMiniature.querySelector('.picture__likes').textContent = likes;
-  pictureMiniature.querySelector('.picture__comments').textContent = comments.length + 1;
+  pictureMiniature.querySelector('.picture__comments').textContent = comments.length;
   pictureMiniaturesFragment.appendChild(pictureMiniature);
 });
 
