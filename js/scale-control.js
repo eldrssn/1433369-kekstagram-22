@@ -15,6 +15,13 @@ const scale = scaleField.querySelector('.scale__control--value');
 const getImgScaleStyle = (value) => {
   return `scale(${parseInt(value) / 100}`;
 }
+
+// функция сброса масштаба
+const unsetScaleControl = () => {
+  scale.value = MAX_SCALE_VALUE + '%';
+  img.style.transform = getImgScaleStyle(scale.value);
+}
+
 const setScaleControl = () => {
   // обработчик на кнопку уменьшения изображения
   scaleSmaller.addEventListener('click', () => {
@@ -37,4 +44,4 @@ const setScaleControl = () => {
   });
 
 }
-export { img, setScaleControl };
+export { img, setScaleControl, unsetScaleControl };

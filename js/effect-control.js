@@ -21,7 +21,15 @@ const checkSliderExists = () => {
   }
 };
 
-// функция создания/удаления слайдера и изменения эффекта на фото
+// функция сброса значений со слайдера
+const unsetEffectControl = () => {
+  img.className = '';
+  img.style.filter = 'none';
+  sliderLevel.value = '';
+  sliderElement.noUiSlider.destroy()
+}
+
+// функция создания слайдера и изменения эффекта на фото
 // со значениями по ТЗ
 const setEffectContol = () => {
 
@@ -134,12 +142,9 @@ const setEffectContol = () => {
   });
 
   none.addEventListener('click', () => {
-    img.className = '';
-    img.style.filter = 'none';
-    sliderLevel.value = '';
-    sliderElement.noUiSlider.destroy()
+    unsetEffectControl()
   });
 
 };
 
-export { setEffectContol };
+export { setEffectContol, unsetEffectControl };

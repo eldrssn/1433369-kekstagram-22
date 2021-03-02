@@ -1,5 +1,5 @@
-import { setScaleControl } from './scale-control.js'
-import { setEffectContol } from './effect-control.js'
+import { setScaleControl, unsetScaleControl } from './scale-control.js'
+import { setEffectContol, unsetEffectControl } from './effect-control.js'
 
 // нахлжим DOM-элементы
 const uploadForm = document.querySelector('.img-upload__form');
@@ -15,8 +15,7 @@ const closeModal = () => {
 }
 
 // обработчик клика на открытие модального окна
-uploadStart.addEventListener('click', (evt) => {
-  evt.preventDefault();
+uploadStart.addEventListener('change', () => {
 
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -24,12 +23,16 @@ uploadStart.addEventListener('click', (evt) => {
   //обработчик закрытия модального окна по клику
   uploadCancel.addEventListener('click', () => {
     closeModal();
+    unsetScaleControl();
+    unsetEffectControl();
   });
 
   // обработчик закрытия модального окна по клавише ESC
   document.addEventListener('keydown', (evt) => {
     if (evt.key === ('Escape' || 'Esc')) {
       closeModal();
+      unsetScaleControl();
+      unsetEffectControl();
     }
   });
 
