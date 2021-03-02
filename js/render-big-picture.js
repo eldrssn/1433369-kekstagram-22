@@ -31,6 +31,7 @@ for (let i = 0; i < smallPictures.length; i++) {
     bigPictureContainer.classList.remove('hidden');
 
     bigPictureContainer.querySelector('.big-picture__img img').src = postsFeed[i].url;
+    bigPictureContainer.querySelector('.big-picture__img img').alt = postsFeed[i].description;
     bigPictureContainer.querySelector('.likes-count').textContent = postsFeed[i].likes;
     bigPictureContainer.querySelector('.comments-count').textContent = postsFeed[i].comments.length;
     bigPictureContainer.querySelector('.social__caption').textContent = postsFeed[i].description;
