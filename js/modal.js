@@ -35,7 +35,7 @@ uploadStart.addEventListener('change', () => {
       closeModal();
       unsetScaleControl();
       unsetEffectControl();
-      unsetValidationForm
+      unsetValidationForm();
     }
   });
 
