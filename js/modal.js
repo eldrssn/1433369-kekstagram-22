@@ -1,5 +1,6 @@
 import { setScaleControl, unsetScaleControl } from './scale-control.js'
 import { setEffectContol, unsetEffectControl } from './effect-control.js'
+import { setValidationForm, unsetValidationForm } from './validation.js';
 
 // нахлжим DOM-элементы
 const uploadForm = document.querySelector('.img-upload__form');
@@ -25,6 +26,7 @@ uploadStart.addEventListener('change', () => {
     closeModal();
     unsetScaleControl();
     unsetEffectControl();
+    unsetValidationForm
   });
 
   // обработчик закрытия модального окна по клавише ESC
@@ -33,6 +35,7 @@ uploadStart.addEventListener('change', () => {
       closeModal();
       unsetScaleControl();
       unsetEffectControl();
+      unsetValidationForm
     }
   });
 
@@ -40,4 +43,5 @@ uploadStart.addEventListener('change', () => {
   // были активны только, когда окно открыто
   setScaleControl();
   setEffectContol();
+  setValidationForm();
 });
