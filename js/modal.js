@@ -24,7 +24,11 @@ uploadInput.addEventListener('change', () => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    sendData(showSuccessModal, showErrorModal, new FormData(evt.target));
+    sendData(
+      () => showSuccessModal(),
+      () => showErrorModal(),
+      new FormData(evt.target),
+    );
     closeModal();
     unsetScaleControl();
     unsetEffectControl();

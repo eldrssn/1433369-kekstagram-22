@@ -1,6 +1,7 @@
 import { renderPictures } from './render.js'
 import { renderBigPicture } from './render-big-picture.js';
 import { showAlert } from './util.js';
+// import { setFilter } from './filter.js';
 
 const getPostsFeed = () => {
   return fetch('https://22.javascript.pages.academy/kekstagram/data')
@@ -8,6 +9,7 @@ const getPostsFeed = () => {
     .then((data) => {
       renderPictures(data);
       renderBigPicture(data);
+      // setFilter();
     })
     .catch(() => {
       showAlert('Ошибка загрузки изображений');
@@ -22,12 +24,19 @@ const sendData = (onSuccess, onFail, body) => {
       body,
     },
   )
-    .then((response) => {
+    .then((/*response*/) => {
+      /*
+      тут странное поведение в консоли
+      если расскоментить этот код, то в консоли будет видно, что при повторной отправке изображения
+      сначала вылезет ошибка 400, но затем запрос успешно отправиться на сервер
+      не понял, что здесь поменял, но все таки этот код заработал
+
       if (response.ok) {
-        onSuccess();
+        console.log(response);
       } else {
-        onFail();
-      }
+        console.log('ошибка');
+      }*/
+      onSuccess();
     })
     .catch(() => {
       onFail();
@@ -35,30 +44,3 @@ const sendData = (onSuccess, onFail, body) => {
 
 }
 export { getPostsFeed, sendData };
-
-/*
-const renderOnSuccess = (data) => {
-  renderPictures(data);
-  renderBigPicture(data);
-}
-
-
-  return fetch('https://22.javascript.pages.academy/kekstagram/data')
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      throw new Error(`${response.status} ${response.statusText}`);
-    })
-    .then((json) => {
-      onSuccess(json);
-    })
-
-    .catch((err) => {
-      onError(err);
-    });
-}
-
-getPostsFeed(renderOnSuccess, console.log())
-*/

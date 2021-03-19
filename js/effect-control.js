@@ -25,8 +25,8 @@ const checkSliderExists = () => {
 const unsetEffectControl = () => {
   img.className = '';
   img.style.filter = 'none';
-  sliderLevel.value = '';
-  sliderElement.noUiSlider.destroy()
+  sliderLevel.setAttribute('value', '');
+  sliderElement.setAttribute('disabled', true);
 }
 
 // функция создания слайдера и изменения эффекта на фото
@@ -46,9 +46,10 @@ const setEffectContol = () => {
       step: 0.1,
       connect: 'lower',
     });
+    sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.value = values;
+      sliderLevel.setAttribute('value', values);
       img.style.filter = `grayscale(${sliderLevel.value})`;
     });
 
@@ -67,9 +68,10 @@ const setEffectContol = () => {
       step: 0.1,
       connect: 'lower',
     });
+    sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.value = values;
+      sliderLevel.setAttribute('value', values);
       img.style.filter = `sepia(${sliderLevel.value})`;
     });
 
@@ -89,9 +91,10 @@ const setEffectContol = () => {
       step: 1,
       connect: 'lower',
     });
+    sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.value = values;
+      sliderLevel.setAttribute('value', values);
       img.style.filter = `invert(${sliderLevel.value}%)`;
     });
 
@@ -111,9 +114,10 @@ const setEffectContol = () => {
       step: 0.1,
       connect: 'lower',
     });
+    sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.value = values;
+      sliderLevel.setAttribute('value', values);
       img.style.filter = `blur(${sliderLevel.value}px)`;
     });
 
@@ -133,9 +137,10 @@ const setEffectContol = () => {
       step: 0.1,
       connect: 'lower',
     });
+    sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.value = values;
+      sliderLevel.setAttribute('value', values);
       img.style.filter = `brightness(${sliderLevel.value})`;
     });
 
