@@ -49,7 +49,7 @@ const setEffectContol = () => {
     sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.setAttribute('value', values);
+      sliderLevel.setAttribute('value', toString(values[0]));
       img.style.filter = `grayscale(${sliderLevel.value})`;
     });
 
@@ -71,7 +71,7 @@ const setEffectContol = () => {
     sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.setAttribute('value', values);
+      sliderLevel.setAttribute('value', toString(values[0]));
       img.style.filter = `sepia(${sliderLevel.value})`;
     });
 
@@ -94,7 +94,7 @@ const setEffectContol = () => {
     sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.setAttribute('value', values);
+      sliderLevel.setAttribute('value', toString(values[0]));
       img.style.filter = `invert(${sliderLevel.value}%)`;
     });
 
@@ -117,7 +117,7 @@ const setEffectContol = () => {
     sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.setAttribute('value', values);
+      sliderLevel.setAttribute('value', toString(values[0]));
       img.style.filter = `blur(${sliderLevel.value}px)`;
     });
 
@@ -140,7 +140,7 @@ const setEffectContol = () => {
     sliderElement.removeAttribute('disabled');
 
     sliderElement.noUiSlider.on('update', (values) => {
-      sliderLevel.setAttribute('value', values);
+      sliderLevel.setAttribute('value', toString(values[0]));
       img.style.filter = `brightness(${sliderLevel.value})`;
     });
 

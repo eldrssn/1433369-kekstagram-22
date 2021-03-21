@@ -10,30 +10,32 @@ const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.querySelector('body');
 
+const onUploadFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    () => showSuccessModal(),
+    () => showErrorModal(),
+    new FormData(evt.target),
+  );
+  closeModal();
+  unsetScaleControl();
+  unsetEffectControl();
+
+}
 
 // функция закрытия модального окна
 const closeModal = () => {
   uploadOverlay.classList.add('hidden');
   body.classList.remove('.modal-open');
   uploadForm.reset();
+  uploadForm.removeEventListener('submit', onUploadFormSubmit);
 }
 
 // обработчик клика на открытие модального окна
 uploadInput.addEventListener('change', () => {
 
-  uploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    sendData(
-      () => showSuccessModal(),
-      () => showErrorModal(),
-      new FormData(evt.target),
-    );
-    closeModal();
-    unsetScaleControl();
-    unsetEffectControl();
-
-  });
+  uploadForm.addEventListener('submit', onUploadFormSubmit);
 
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
