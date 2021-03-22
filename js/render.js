@@ -1,4 +1,4 @@
-import { postsFeed } from './data.js';
+// import { postsFeed } from './data.js';
 
 // находим DOM-элемент для вставки изображение
 const picturesContainer = document.querySelector('.pictures');
@@ -12,16 +12,18 @@ const pictureTemplate = document.querySelector('#picture')
 const pictureMiniaturesFragment = document.createDocumentFragment();
 
 // заполняем документ фрагмент временными данными
-postsFeed.forEach(({ url, likes, comments }) => {
-  const pictureMiniature = pictureTemplate.cloneNode(true);
-  pictureMiniature.querySelector('.picture__img').src = url;
-  pictureMiniature.querySelector('.picture__likes').textContent = likes;
-  pictureMiniature.querySelector('.picture__comments').textContent = comments.length;
-  pictureMiniaturesFragment.appendChild(pictureMiniature);
-});
+const renderPictures = (data) => {
+  data.forEach(({ url, likes, comments }) => {
+    const pictureMiniature = pictureTemplate.cloneNode(true);
+    pictureMiniature.querySelector('.picture__img').src = url;
+    pictureMiniature.querySelector('.picture__likes').textContent = likes;
+    pictureMiniature.querySelector('.picture__comments').textContent = comments.length;
+    pictureMiniaturesFragment.appendChild(pictureMiniature);
+  });
 
-// отрисовываем на странице
-picturesContainer.appendChild(pictureMiniaturesFragment);
+  // отрисовываем на странице
+  picturesContainer.appendChild(pictureMiniaturesFragment);
+}
 
-
+export { renderPictures };
 
