@@ -1,15 +1,37 @@
-import { renderPictures } from './render.js'
-import { renderBigPicture } from './render-big-picture.js';
+/* global _:readonly */
+import { renderPictures, clearPictures } from './render.js'
 import { showAlert } from './util.js';
-// import { setFilter } from './filter.js';
+import { createFilter, setDefaultClick, setRandomClick, setDiscussedClick } from './filter.js';
+
+const RENDER_DELAY = 500;
+const RANDOM_PHOTO_COUNT = 10;
 
 const getPostsFeed = () => {
   return fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((data) => {
+      createFilter();
       renderPictures(data);
-      renderBigPicture(data);
-      // setFilter();
+      setDefaultClick(_.debounce(
+        () => {
+          clearPictures();
+          renderPictures(data);
+        }, RENDER_DELAY));
+      setRandomClick(_.debounce(
+        () => {
+          clearPictures();
+          renderPictures(data
+            .slice()
+            .sort(() => 0.5 - Math.random())
+            .slice(0, RANDOM_PHOTO_COUNT));
+        }, RENDER_DELAY));
+      setDiscussedClick(_.debounce(
+        () => {
+          clearPictures();
+          renderPictures(data
+            .slice()
+            .sort((a, b) => b.comments.length - a.comments.length));
+        }, RENDER_DELAY));
     })
     .catch(() => {
       showAlert('Ошибка загрузки изображений');
@@ -24,18 +46,7 @@ const sendData = (onSuccess, onFail, body) => {
       body,
     },
   )
-    .then((/*response*/) => {
-      /*
-      тут странное поведение в консоли
-      если расскоментить этот код, то в консоли будет видно, что при повторной отправке изображения
-      сначала вылезет ошибка 400, но затем запрос успешно отправиться на сервер
-      не понял, что здесь поменял, но все таки этот код заработал
-
-      if (response.ok) {
-        console.log(response);
-      } else {
-        console.log('ошибка');
-      }*/
+    .then(() => {
       onSuccess();
     })
     .catch(() => {

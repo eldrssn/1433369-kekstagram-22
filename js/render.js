@@ -1,4 +1,4 @@
-// import { postsFeed } from './data.js';
+import { renderBigPicture } from './render-big-picture.js';
 
 // находим DOM-элемент для вставки изображение
 const picturesContainer = document.querySelector('.pictures');
@@ -10,6 +10,13 @@ const pictureTemplate = document.querySelector('#picture')
 
 // создаем документ-фрагмент
 const pictureMiniaturesFragment = document.createDocumentFragment();
+
+const clearPictures = () => {
+  const pictures = picturesContainer.querySelectorAll('.picture');
+  pictures.forEach((el) => {
+    picturesContainer.removeChild(el);
+  })
+}
 
 // заполняем документ фрагмент временными данными
 const renderPictures = (data) => {
@@ -23,7 +30,9 @@ const renderPictures = (data) => {
 
   // отрисовываем на странице
   picturesContainer.appendChild(pictureMiniaturesFragment);
+
+  renderBigPicture(data);
 }
 
-export { renderPictures };
+export { renderPictures, clearPictures };
 
