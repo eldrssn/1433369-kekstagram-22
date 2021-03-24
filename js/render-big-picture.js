@@ -2,7 +2,6 @@ const MIN_COMMENTS_COUNT = 5;
 
 let displayCommentsCount = MIN_COMMENTS_COUNT;
 
-// находим DOM-элементы
 const body = document.body;
 const smallPicturesContainer = document.querySelector('.pictures');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -14,32 +13,13 @@ const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
 
-
-// создадим документ-фрагмент, куда будем отрисовывать комментарии
 const commentsFragment = document.createDocumentFragment();
-
-// функция закрытия большой фотографии
-const onCloseButtonClick = () => {
-  bigPictureContainer.classList.add('hidden');
-  body.classList.remove('modal-open');
-  commentContainer.textContent = '';
-  displayCommentsCount = MIN_COMMENTS_COUNT;
-  // console.log('закрыто ' + displayCommentsCount);
-}
-
 
 const clearComments = () => {
   const renderedComments = bigPictureContainer.querySelectorAll('.social__comment');
   renderedComments.forEach((el) => {
     commentContainer.removeChild(el);
   });
-}
-
-const addComments = (obj) => {
-  clearComments();
-  displayCommentsCount += MIN_COMMENTS_COUNT;
-  renderComments(obj);
-  // console.log('при клике ' + displayCommentsCount);
 }
 
 const showCommentsCounter = (obj) => {
@@ -49,19 +29,6 @@ const showCommentsCounter = (obj) => {
 }
 
 const renderComments = (obj) => {
-
-  const onCommentsLoaderClick = () => addComments(obj);
-
-  const showCommentsLoader = (obj) => {
-    if (displayCommentsCount <= obj.comments.length) {
-      commentsLoader.classList.remove('hidden');
-      commentsLoader.addEventListener('click', onCommentsLoaderClick);
-    } else {
-      commentsLoader.classList.add('hidden');
-      commentsLoader.removeEventListener('click', onCommentsLoaderClick);
-    }
-  }
-
   obj.comments
     .slice(0, displayCommentsCount)
     .forEach(({ avatar, message, name }) => {
@@ -72,19 +39,42 @@ const renderComments = (obj) => {
       commentsFragment.appendChild(newComment);
     })
   commentContainer.appendChild(commentsFragment);
-  // console.log('при рендере ' + displayCommentsCount)
-
 
   showCommentsCounter(obj);
-  showCommentsLoader(obj);
 }
 
-// цикл, который связывает превью фото с отрисовкой большой фотографии
 const renderBigPicture = (data) => {
-  // все превью изображений заключим в коллекцию
   const smallPictures = smallPicturesContainer.querySelectorAll('a');
 
   for (let i = 0; i < smallPictures.length; i++) {
+
+    const onCloseButtonClick = () => {
+      bigPictureContainer.classList.add('hidden');
+      body.classList.remove('modal-open');
+      commentContainer.textContent = '';
+      displayCommentsCount = MIN_COMMENTS_COUNT;
+      commentsLoader.removeEventListener('click', onCommentsLoaderClick);
+    }
+
+    const addComments = (obj) => {
+      clearComments();
+      displayCommentsCount += MIN_COMMENTS_COUNT;
+      renderComments(obj);
+      showCommentsLoader(obj);
+    }
+
+    const onCommentsLoaderClick = () => addComments(data[i]);
+
+    const showCommentsLoader = (obj) => {
+      if (displayCommentsCount > obj.comments.length) {
+        commentsLoader.classList.add('hidden');
+        commentsLoader.removeEventListener('click', onCommentsLoaderClick);
+      } else {
+        commentsLoader.classList.remove('hidden');
+        commentsLoader.addEventListener('click', onCommentsLoaderClick);
+      }
+    }
+
     smallPictures[i].addEventListener('click', () => {
 
       bigPictureContainer.classList.remove('hidden');
@@ -96,6 +86,7 @@ const renderBigPicture = (data) => {
       bigPictureContainer.querySelector('.social__caption').textContent = data[i].description;
 
       renderComments(data[i]);
+      showCommentsLoader(data[i]);
 
       body.classList.add('modal-open');
 
