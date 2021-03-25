@@ -1,9 +1,10 @@
-import { setScaleControl, unsetScaleControl } from './scale-control.js'
+import { img, setScaleControl, unsetScaleControl } from './scale-control.js'
 import { setEffectContol, unsetEffectControl } from './effect-control.js'
 import { sendData } from './api.js';
 import { showSuccessModal, showErrorModal } from './upload-message.js';
 import { setValidationForm, unsetValidationForm } from './validation.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 // находим DOM-элементы
 const uploadForm = document.querySelector('.img-upload__form');
@@ -11,6 +12,25 @@ const uploadInput = uploadForm.querySelector('.img-upload__input');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.querySelector('body');
+
+const insertPhoto = () => {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      img.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+}
 
 const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
@@ -36,6 +56,8 @@ const closeModal = () => {
 
 // обработчик клика на открытие модального окна
 uploadInput.addEventListener('change', () => {
+
+  insertPhoto();
 
   uploadForm.addEventListener('submit', onUploadFormSubmit);
 
