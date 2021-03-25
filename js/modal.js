@@ -12,6 +12,7 @@ const uploadInput = uploadForm.querySelector('.img-upload__input');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.querySelector('body');
+const effectPreviews = uploadForm.querySelectorAll('.effects__preview');
 
 const insertPhoto = () => {
   const file = uploadInput.files[0];
@@ -26,6 +27,9 @@ const insertPhoto = () => {
 
     reader.addEventListener('load', () => {
       img.src = reader.result;
+      effectPreviews.forEach((preview) => {
+        preview.style.backgroundImage = `url(${reader.result}`;
+      });
     });
 
     reader.readAsDataURL(file);
