@@ -1,7 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 
-//  Функция, возвращающая случайное целое
-//  число из переданного диапазона включительно
 const getRandomNumber = function (min, max) {
   if (min < 0 || max < 0) {
     return 'Числа не могут быть отрицательные';
@@ -13,15 +11,6 @@ const getRandomNumber = function (min, max) {
   return Math.floor(randomNumber);
 }
 
-// Функция для проверки максимальной длины строки.
-const checkStringLength = (string, maxLength) => {
-  return (string.length <= maxLength) ? true : false;
-}
-
-checkStringLength('Строка для проверки длины', 140);
-
-// Функция, для заполнения массива случайными числами
-// без повторения, в указанном диапазоне
 const fillArrayRandom = (arr, min, max) => {
   let temp;
   while (arr.length < max) {
@@ -30,15 +19,6 @@ const fillArrayRandom = (arr, min, max) => {
       arr.push(temp);
     }
   }
-}
-
-// Функция для возвращение полученного случайного
-// числа из конца массива
-const getNumber = (arr) => arr.pop();
-
-// Функция поиска случайного элемента в переданном массиве
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomNumber(0, elements.length - 1)];
 }
 
 const showAlert = (message) => {
@@ -54,7 +34,6 @@ const showAlert = (message) => {
   alertContainer.style.backgroundColor = 'red';
 
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
@@ -62,4 +41,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 }
 
-export { getRandomNumber, fillArrayRandom, getNumber, getRandomArrayElement, showAlert };
+export { getRandomNumber, fillArrayRandom, showAlert };

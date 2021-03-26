@@ -13,42 +13,46 @@ const errorMessage = document.querySelector('#error')
   .cloneNode(true);
 const errorMessageCloseButton = errorMessage.querySelector('.error__button');
 
-
 const closeSuccessModal = () => {
   main.removeChild(successMessage);
+  body.removeEventListener('click', onSuccessBodyClick);
 }
+
 const closeErrorModal = () => {
   main.removeChild(errorMessage);
-
+  body.removeEventListener('click', onErrorBodyClick);
 }
+
+const onEscKeydown = (evt) => {
+  if (evt.key === ('Escape' || 'Esc')) {
+    closeSuccessModal();
+  }
+}
+
+const onSuccessBodyClick = (evt) => {
+  if (evt.target.className === 'success') {
+    closeSuccessModal();
+  }
+}
+
+const onErrorBodyClick = (evt) => {
+  if (evt.target.className === 'error') {
+    closeSuccessModal();
+  }
+}
+
 const showSuccessModal = () => {
   main.appendChild(successMessage);
   successMessageCloseButton.addEventListener('click', closeSuccessModal);
-  successMessageCloseButton.addEventListener('keydown', (evt) => {
-    if (evt.key === ('Escape' || 'Esc')) {
-      closeSuccessModal();
-    }
-  });
-  body.addEventListener('click', (evt) => {
-    if (evt.currentTarget !== successMessage) {
-      closeSuccessModal();
-    }
-  });
+  successMessageCloseButton.addEventListener('keydown', onEscKeydown);
+  body.addEventListener('click', onSuccessBodyClick);
 }
 
 const showErrorModal = () => {
   main.appendChild(errorMessage);
   errorMessageCloseButton.addEventListener('click', closeErrorModal);
-  errorMessageCloseButton.addEventListener('keydown', (evt) => {
-    if (evt.key === ('Escape' || 'Esc')) {
-      closeErrorModal();
-    }
-  });
-  body.addEventListener('click', (evt) => {
-    if (evt.currentTarget !== errorMessage) {
-      closeErrorModal();
-    }
-  });
+  errorMessageCloseButton.addEventListener('keydown', onEscKeydown);
+  body.addEventListener('click', onErrorBodyClick);
 }
 
 export { showSuccessModal, showErrorModal };

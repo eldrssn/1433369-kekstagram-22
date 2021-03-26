@@ -43,10 +43,17 @@ const renderComments = (obj) => {
   showCommentsCounter(obj);
 }
 
+
 const renderBigPicture = (data) => {
   const smallPictures = smallPicturesContainer.querySelectorAll('a');
 
   for (let i = 0; i < smallPictures.length; i++) {
+
+    const onBodyEscKeydown = (evt) => {
+      if (evt.key === ('Escape' || 'Esc')) {
+        onCloseButtonClick();
+      }
+    }
 
     const onCloseButtonClick = () => {
       bigPictureContainer.classList.add('hidden');
@@ -54,6 +61,7 @@ const renderBigPicture = (data) => {
       commentContainer.textContent = '';
       displayCommentsCount = MIN_COMMENTS_COUNT;
       commentsLoader.removeEventListener('click', onCommentsLoaderClick);
+      document.removeEventListener('keydown', onBodyEscKeydown)
     }
 
     const addComments = (obj) => {
@@ -76,7 +84,6 @@ const renderBigPicture = (data) => {
     }
 
     smallPictures[i].addEventListener('click', () => {
-
       bigPictureContainer.classList.remove('hidden');
 
       bigPictureContainer.querySelector('.big-picture__img img').src = data[i].url;
@@ -89,14 +96,8 @@ const renderBigPicture = (data) => {
       showCommentsLoader(data[i]);
 
       body.classList.add('modal-open');
-
       closeButton.addEventListener('click', onCloseButtonClick)
-
-      document.addEventListener('keydown', (evt) => {
-        if (evt.key === ('Escape' || 'Esc')) {
-          onCloseButtonClick();
-        }
-      })
+      document.addEventListener('keydown', onBodyEscKeydown)
     })
   }
 }

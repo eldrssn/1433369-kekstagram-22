@@ -31,4 +31,5 @@ const sendData = (onSuccess, onFail, body) => {
     });
 
 }
+
 export { getPostsFeed, sendData };

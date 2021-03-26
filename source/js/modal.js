@@ -6,7 +6,6 @@ import { setValidationForm, unsetValidationForm } from './validation.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-// находим DOM-элементы
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
@@ -35,6 +34,14 @@ const insertPhoto = () => {
   }
 }
 
+const closeModal = () => {
+  uploadOverlay.classList.add('hidden');
+  body.classList.remove('.modal-open');
+  uploadForm.reset();
+  uploadForm.removeEventListener('submit', onUploadFormSubmit);
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
 const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
 
@@ -46,47 +53,32 @@ const onUploadFormSubmit = (evt) => {
   closeModal();
   unsetScaleControl();
   unsetEffectControl();
-
 }
 
-// функция закрытия модального окна
-const closeModal = () => {
-  uploadOverlay.classList.add('hidden');
-  body.classList.remove('.modal-open');
-  uploadForm.reset();
-  uploadForm.removeEventListener('submit', onUploadFormSubmit);
-}
-
-// обработчик клика на открытие модального окна
-uploadInput.addEventListener('change', () => {
-
-  insertPhoto();
-
-  uploadForm.addEventListener('submit', onUploadFormSubmit);
-
-  uploadOverlay.classList.remove('hidden');
-  body.classList.add('modal-open');
-
-  //обработчик закрытия модального окна по клику
-  uploadCancel.addEventListener('click', () => {
+const onDocumentKeydown = (evt) => {
+  if (evt.key === ('Escape' || 'Esc')) {
     closeModal();
     unsetScaleControl();
     unsetEffectControl();
     unsetValidationForm();
-  });
+  }
+}
 
-  // обработчик закрытия модального окна по клавише ESC
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === ('Escape' || 'Esc')) {
-      closeModal();
-      unsetScaleControl();
-      unsetEffectControl();
-      unsetValidationForm();
-    }
-  });
+const onUploadCancelClick = () => {
+  closeModal();
+  unsetScaleControl();
+  unsetEffectControl();
+  unsetValidationForm();
+}
 
-  // добавляем контролы масштаба и эффектов внутрь, чтобы обработчики внутри
-  // были активны только, когда окно открыто
+uploadInput.addEventListener('change', () => {
+  insertPhoto();
+  uploadForm.addEventListener('submit', onUploadFormSubmit);
+  uploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
+  uploadCancel.addEventListener('click', onUploadCancelClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+
   setScaleControl();
   setEffectContol();
   setValidationForm();
