@@ -1,6 +1,56 @@
 /* global noUiSlider:readonly */
 import { img } from './scale-control.js';
 
+const CHROME = {
+  RANGE: {
+    MIN: 0,
+    MAX: 1,
+  },
+  START: 1,
+  STEP: 0.1,
+  CONNECT: 'lower',
+}
+
+const SEPIA = {
+  RANGE: {
+    MIN: 0,
+    MAX: 1,
+  },
+  START: 1,
+  STEP: 0.1,
+  CONNECT: 'lower',
+}
+
+const MARVIN = {
+  RANGE: {
+    MIN: 0,
+    MAX: 100,
+  },
+  START: 100,
+  STEP: 0.1,
+  CONNECT: 'lower',
+}
+
+const PHOBOS = {
+  RANGE: {
+    MIN: 0,
+    MAX: 3,
+  },
+  START: 3,
+  STEP: 0.1,
+  CONNECT: 'lower',
+}
+
+const HEAT = {
+  RANGE: {
+    MIN: 1,
+    MAX: 3,
+  },
+  START: 3,
+  STEP: 0.1,
+  CONNECT: 'lower',
+}
+
 const effectsWrap = document.querySelector('.img-upload__effects');
 const chrome = effectsWrap.querySelector('[for="effect-chrome"]');
 const sepia = effectsWrap.querySelector('[for="effect-sepia"]');
@@ -33,12 +83,12 @@ const setEffectContol = () => {
 
     noUiSlider.create(sliderElement, {
       range: {
-        min: 0,
-        max: 1,
+        min: CHROME.RANGE.MIN,
+        max: CHROME.RANGE.MAX,
       },
-      start: 1,
-      step: 0.1,
-      connect: 'lower',
+      start: CHROME.START,
+      step: CHROME.STEP,
+      connect: CHROME.CONNECT,
     });
     sliderElement.removeAttribute('disabled');
 
@@ -54,12 +104,12 @@ const setEffectContol = () => {
 
     noUiSlider.create(sliderElement, {
       range: {
-        min: 0,
-        max: 1,
+        min: SEPIA.RANGE.MIN,
+        max: SEPIA.RANGE.MAX,
       },
-      start: 1,
-      step: 0.1,
-      connect: 'lower',
+      start: SEPIA.START,
+      step: SEPIA.STEP,
+      connect: SEPIA.CONNECT,
     });
     sliderElement.removeAttribute('disabled');
 
@@ -76,12 +126,12 @@ const setEffectContol = () => {
 
     noUiSlider.create(sliderElement, {
       range: {
-        min: 0,
-        max: 100,
+        min: MARVIN.RANGE.MIN,
+        max: MARVIN.RANGE.MAX,
       },
-      start: 100,
-      step: 1,
-      connect: 'lower',
+      start: MARVIN.START,
+      step: MARVIN.STEP,
+      connect: MARVIN.CONNECT,
     });
     sliderElement.removeAttribute('disabled');
 
@@ -97,12 +147,12 @@ const setEffectContol = () => {
 
     noUiSlider.create(sliderElement, {
       range: {
-        min: 0,
-        max: 3,
+        min: PHOBOS.RANGE.MIN,
+        max: PHOBOS.RANGE.MAX,
       },
-      start: 3,
-      step: 0.1,
-      connect: 'lower',
+      start: PHOBOS.START,
+      step: PHOBOS.STEP,
+      connect: PHOBOS.CONNECT,
     });
     sliderElement.removeAttribute('disabled');
 
@@ -118,12 +168,12 @@ const setEffectContol = () => {
 
     noUiSlider.create(sliderElement, {
       range: {
-        min: 1,
-        max: 3,
+        min: HEAT.RANGE.MIN,
+        max: HEAT.RANGE.MAX,
       },
-      start: 3,
-      step: 0.1,
-      connect: 'lower',
+      start: HEAT.START,
+      step: HEAT.STEP,
+      connect: HEAT.CONNECT,
     });
     sliderElement.removeAttribute('disabled');
 

@@ -19,9 +19,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
     "test": "eslint source/js/",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\""
   },
   "engines": {
     "node": ">=12.0.0"

@@ -3,6 +3,7 @@ import { setEffectContol, unsetEffectControl } from './effect-control.js'
 import { sendData } from './api.js';
 import { showSuccessModal, showErrorModal } from './upload-message.js';
 import { setValidationForm, unsetValidationForm } from './validation.js';
+import { isEscape } from './util.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
@@ -56,7 +57,7 @@ const onUploadFormSubmit = (evt) => {
 }
 
 const onDocumentKeydown = (evt) => {
-  if (evt.key === ('Escape' || 'Esc')) {
+  if (isEscape(evt)) {
     closeModal();
     unsetScaleControl();
     unsetEffectControl();

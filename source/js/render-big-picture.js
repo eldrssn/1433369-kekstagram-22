@@ -1,3 +1,5 @@
+import { isEscape } from './util.js';
+
 const MIN_COMMENTS_COUNT = 5;
 
 let displayCommentsCount = MIN_COMMENTS_COUNT;
@@ -49,12 +51,6 @@ const renderBigPicture = (data) => {
 
   for (let i = 0; i < smallPictures.length; i++) {
 
-    const onBodyEscKeydown = (evt) => {
-      if (evt.key === ('Escape' || 'Esc')) {
-        onCloseButtonClick();
-      }
-    }
-
     const onCloseButtonClick = () => {
       bigPictureContainer.classList.add('hidden');
       body.classList.remove('modal-open');
@@ -62,6 +58,14 @@ const renderBigPicture = (data) => {
       displayCommentsCount = MIN_COMMENTS_COUNT;
       commentsLoader.removeEventListener('click', onCommentsLoaderClick);
       document.removeEventListener('keydown', onBodyEscKeydown)
+    }
+
+    const closeBigPicture = onCloseButtonClick;
+
+    const onBodyEscKeydown = (evt) => {
+      if (isEscape(evt)) {
+        closeBigPicture();
+      }
     }
 
     const addComments = (obj) => {

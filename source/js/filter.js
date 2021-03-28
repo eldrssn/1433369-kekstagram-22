@@ -33,7 +33,7 @@ const createFilter = () => {
   });
 }
 
-const onFilterClick = (data) => {
+const getFilterPictures = (data) => {
   if (filterRandom.classList.contains('img-filters__button--active')) {
     clearPictures();
     renderPictures(data
@@ -49,8 +49,8 @@ const onFilterClick = (data) => {
   }
 }
 
-const filter = (data) => {
-  filterContainer.addEventListener('click', _.debounce(() => onFilterClick(data), RENDER_DELAY));
+const setFilter = (data) => {
+  filterContainer.addEventListener('click', _.debounce(() => getFilterPictures(data), RENDER_DELAY));
 }
 
-export { createFilter, filter };
+export { createFilter, setFilter };

@@ -1,14 +1,17 @@
 import { renderPictures } from './render.js'
 import { showAlert } from './util.js';
-import { createFilter, filter } from './filter.js';
+import { createFilter, setFilter } from './filter.js';
+
+const FETCH_GET_URL = 'https://22.javascript.pages.academy/kekstagram/data';
+const FETCH_POST_URL = 'https://22.javascript.pages.academy/kekstagram';
 
 const getPostsFeed = () => {
-  return fetch('https://22.javascript.pages.academy/kekstagram/data')
+  return fetch(FETCH_GET_URL)
     .then((response) => response.json())
     .then((data) => {
       renderPictures(data);
       createFilter(data);
-      filter(data);
+      setFilter(data);
     })
     .catch(() => {
       showAlert('Ошибка загрузки изображений');
@@ -17,7 +20,7 @@ const getPostsFeed = () => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/kekstagram',
+    FETCH_POST_URL,
     {
       method: 'POST',
       body,

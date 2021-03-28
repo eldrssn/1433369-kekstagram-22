@@ -1,26 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 
-const getRandomNumber = function (min, max) {
-  if (min < 0 || max < 0) {
-    return 'Числа не могут быть отрицательные';
-  } else if (max <= min) {
-    return 'Первое число должно быть меньше второго';
-  }
-
-  let randomNumber = min + Math.random() * (max + 1 - min);
-  return Math.floor(randomNumber);
-}
-
-const fillArrayRandom = (arr, min, max) => {
-  let temp;
-  while (arr.length < max) {
-    temp = getRandomNumber(min, max);
-    if (!arr.includes(temp)) {
-      arr.push(temp);
-    }
-  }
-}
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -41,4 +20,8 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 }
 
-export { getRandomNumber, fillArrayRandom, showAlert };
+const isEscape = (evt) => {
+  return evt.key === ('Escape');
+}
+
+export { showAlert, isEscape };
