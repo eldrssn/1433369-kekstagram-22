@@ -21,7 +21,7 @@
   "scripts": {
     "test": "eslint source/js/",
     "build": "webpack --mode production",
-    "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\""
+    "start": "browser-sync start --server \"docs/\" --no-ui --files \"source/**/*.js\""
   },
   "engines": {
     "node": ">=12.0.0"
