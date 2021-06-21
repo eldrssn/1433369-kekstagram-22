@@ -5,7 +5,7 @@
   "description": "Личный проект «Кекстаграм» от HTML Academy",
   "repository": {
     "type": "git",
-    "url": "git@github.com:htmlacademy-javascript/1433369-kekstagram-22.git"
+    "url": "git+ssh://git@github.com/htmlacademy-javascript/1433369-kekstagram-22.git"
   },
   "bugs": {
     "url": "https://github.com/htmlacademy-javascript/1433369-kekstagram-22/issues"
@@ -25,5 +25,10 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/htmlacademy-javascript/1433369-kekstagram-22#readme",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "keywords": [],
+  "author": ""
 }
