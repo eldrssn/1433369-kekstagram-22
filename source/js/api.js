@@ -2,8 +2,8 @@ import { renderPictures } from './render.js'
 import { showAlert } from './util.js';
 import { createFilter, setFilter } from './filter.js';
 
-const FETCH_GET_URL = 'https://22.javascript.pages.academy/kekstagram/data';
-const FETCH_POST_URL = 'https://22.javascript.pages.academy/kekstagram';
+const FETCH_GET_URL = 'https://23.javascript.pages.academy/kekstagram/data';
+const FETCH_POST_URL = 'https://23.javascript.pages.academy/kekstagram';
 
 const getPostsFeed = () => {
   return fetch(FETCH_GET_URL)
